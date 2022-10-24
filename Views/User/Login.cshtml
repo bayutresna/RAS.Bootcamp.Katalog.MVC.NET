@@ -1,0 +1,31 @@
+@model RAS.Bootcamp.Katalog.MVC.NET.Models.Request.LoginRequest
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<h1 style="text-align:center;">@ViewData["Title"] </h1>
+
+<form action = "Login" method = "post">
+  <div class="mb-3">
+    <label for="" class="form-label">Username</label>
+    <input class="form-control" id="username" asp-for="Username">
+  </div>
+  <div class="mb-3">
+    <label for="" class="form-label">Password</label>
+    <input type="password" class="form-control" id="Password" asp-for="Password">
+  </div>
+  <button type="submit" class="btn btn-primary" >Submit</button>
+</form>
+
+<div class="mb-3">
+  <label for="" class="form-label">Belum Punya Akun?</label>
+   <a  href="@Url.ActionLink("Register")">Buat dulu yuk!</a>
+</div>
+
+@if(ViewBag.ErrorMessage != null && ViewBag.ErrorMessage != ""){
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}

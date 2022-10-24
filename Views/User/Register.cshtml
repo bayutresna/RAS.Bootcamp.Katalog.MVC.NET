@@ -1,0 +1,51 @@
+@model RAS.Bootcamp.Katalog.MVC.NET.Models.Request.RegisterRequest
+@{
+    ViewData["Title"] = "Register Akun";
+}
+
+<h1 style="text-align:center;">@ViewData["Title"] </h1>
+
+@if(ViewBag.ErrorMessage != null && ViewBag.ErrorMessage != ""){
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+
+<form role="form" action="Register" method = "post">
+  
+  <div class="mb-3">
+    <label for="" class="form-label">Username</label>
+    <input class="form-control" id="Username" asp-for="Username">
+  </div>
+  
+  <div class="mb-3">
+    <label for="" class="form-label">Password</label>
+    <input type="password" class="form-control" id="Password" asp-for="Password" >
+  </div>
+  
+  <div class="mb-3">
+    <label for="" class="form-label">FullName</label>
+    <input class="form-control" id="FullName" asp-for="FullName" >
+  </div>
+
+  <div class="mb-3">
+    <label for="" class="form-label">Alamat</label>
+    <input class="form-control" id="Alamat" asp-for="Alamat" >
+  </div>
+
+   <div class="mb-3">
+    <label for="" class="form-label">No HP</label>
+    <input class="form-control" id="NoHP" asp-for="NoHp" >
+  </div>
+    
+  <div class="form-group">
+    <label for="Tipe">Tipe</label>
+        <select id="Tipe" class="form-control" asp-for="Tipe">
+            <option value="Admin">ADMIN</option>
+            <option value="Penjual">PENJUAL</option>
+            <option value="Pembeli">PEMBELI</option>
+        </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

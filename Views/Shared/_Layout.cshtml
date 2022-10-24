@@ -1,0 +1,101 @@
+﻿@using Microsoft.AspNetCore.Authentication.Cookies
+@using Microsoft.AspNetCore.Mvc.RazorPages
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Skadi Store</title>
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+  <!-- header section strats -->
+  <header class="header_section">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg custom_nav-container ">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+          <span>Skadi Store</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class=""> </span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav  ml-auto">
+            @if(!User.IsInRole("Admin") && !User.IsInRole("Penjual") && !User.IsInRole("Pembeli")){
+            <li class="nav-item active">
+              <a class="nav-link" asp-controller="User" asp-action = "Login" >Login <span class="sr-only">(current)</span></a>
+            </li>
+            }
+            <li class="nav-item active">
+              <a class="nav-link" asp-controller="Home" asp-action = "Index" >Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" asp-controller="Transaksi" asp-action="Keranjang"> Keranjang</a>
+            </li>
+            @if (User.IsInRole("Pembeli"))
+            {
+            <li class="nav-item">
+              <a class="nav-link" asp-controller="Transaksi" asp-action="DataTransaksi"> Data Transaksi </a>
+            </li>
+            }
+            @if (User.IsInRole("Pembeli") || User.IsInRole("Penjual") || User.IsInRole("Admin"))
+            {
+            <li class="nav-item">
+              <a class="btn btn-danger" asp-controller="User" asp-action="Logout"> Logout </a>
+            </li>
+            }
+ 
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+     <!-- jQery -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.js"></script>
+    <!-- custom js -->
+    <script src="js/custom.js"></script>
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+    <!-- End Google Map -->
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
