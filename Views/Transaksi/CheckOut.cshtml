@@ -1,0 +1,50 @@
+@model IEnumerable<RAS.Bootcamp.Katalog.MVC.NET.Models.Entities.Keranjang> 
+<table class="table" >
+    
+    <tr>
+        <th>
+            Nama Penjual
+        </th>
+        <th>
+            Nama Barang
+        </th>
+        <th>
+            Harga
+        </th>
+        <th>
+            Jumlah Barang
+        </th>
+        <th>
+            Jumlah Harga
+        </th>
+        <th> </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdBarangNavigation.IdPenjualNavigation.NamaToko)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdBarangNavigation.Nama)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HargaSatuan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jumlah)
+        </td>
+        <td>
+            @(item.Jumlah * item.HargaSatuan)
+        </td>
+        <td>
+            <img src = @item.IdBarangNavigation.Url width="300" height="150">
+        </td>
+
+    </tr>
+}
+    <th>
+        <a class="btn btn-primary" asp-area="" asp-controller="Transaksi" asp-action="Pesan" >Pesan Sekarang</a>
+    </th>
+
+</table>

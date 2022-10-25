@@ -1,0 +1,66 @@
+@model RAS.Bootcamp.Katalog.MVC.NET.Models.Request.RequestTransaksi
+<table class="table" >
+    
+    <tr>
+        <th>
+            Nama Pembeli
+        </th>
+        <th>
+            Alamat Pengiriman
+        </th>
+        <th>
+            Total Harga
+        </th>
+        <th>
+            Metode Pembayaran
+        </th>
+        <th>
+            Status Transaksi
+        </th>
+        <th>
+            Status Pembayaran
+        </th>
+        <th> </th>
+    </tr>
+    <tr>
+        <td>
+            @Model.namapembeli
+        </td>
+        <td>
+            @Model.AlamatPengiriman
+        </td>
+        <td>
+            @Model.TotalHarga
+        </td>
+        <td>
+            @Model.MetodePembayaran
+        </td>
+        <td>
+            @Model.StatusTransaksi
+        </td>
+        <td>
+            @Model.StatusBayar
+        </td>
+    </tr>
+    @if ((@Model.StatusTransaksi != "Diproses") && (@Model.StatusTransaksi != "Dibatalkan") && (@Model.StatusBayar != "Lunas") && (@Model.StatusBayar != "Dibatalkan"))
+    {
+    <th>
+        <a type="button" class="btn btn-primary" asp-action="Pembayaran" asp-controller="Transaksi" asp-route-id = "@Model.Id" >Payment</a>
+    </th>
+
+    <th>
+        <a type="button" class="btn btn-danger" asp-action = "BatalTransaksi" asp-controller="Transaksi" asp-route-id="@Model.Id">Batalkan Transaksi</a>
+    </th>
+    }
+    @if (@Model.StatusTransaksi == "Dikirim"){
+    <th>
+        <a type="button" class="btn btn-primary" asp-action = "TerimaBarang" asp-controller="Transaksi" asp-route-id="@Model.Id">Konfirmasi Penerimaan</a>
+    </th>
+    }
+    @if(@Model.StatusTransaksi == "Sudah Diterima"){
+    <th>
+        <a type="button" class="btn btn-primary" asp-action = "SelesaiTransaksi" asp-controller="Transaksi" asp-route-id="@Model.Id">Selesaikan Pesanan</a>
+    </th>
+    }
+
+</table>

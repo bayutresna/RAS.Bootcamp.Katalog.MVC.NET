@@ -1,0 +1,53 @@
+@model IEnumerable<RAS.Bootcamp.Katalog.MVC.NET.Models.Entities.Transaksi>
+<table class="table" >
+    
+    <tr>
+        <th>
+            Invoice
+        </th>
+        <th>
+            Alamat Pengiriman
+        </th>
+        <th>
+            Total Harga
+        </th>
+        <th>
+            Metode Pembayaran
+        </th>
+        <th>
+            Status Transaksi
+        </th>
+        <th>
+            Status Pembayaran
+        </th>
+        <th> </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @($"INV{item.Id.ToString().PadLeft(8, '0')}")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AlamatPengiriman)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalHarga)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetodePembayaran)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusTransaksi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusBayar)
+        </td>
+    </tr>
+    <th>
+        <a class="btn btn-primary" asp-area="" asp-controller="Transaksi" asp-action="DetailTransaksi" asp-route-id = "@item.Id">Detail</a>
+    </th>
+}
+    
+
+</table>

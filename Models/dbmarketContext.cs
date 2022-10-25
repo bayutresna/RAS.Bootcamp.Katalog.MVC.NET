@@ -78,14 +78,14 @@ namespace RAS.Bootcamp.Katalog.MVC.NET.Models
 
             modelBuilder.Entity<Keranjang>(entity =>
             {
-                entity.HasIndex(e => e.IdBarang, "IX_Keranjangs_IdBarang")
+                entity.HasIndex(e => new { e.IdBarang, e.IdUser }, "IX_Keranjangs_IdBarang_IdUser")
                     .IsUnique();
 
                 entity.HasIndex(e => e.IdUser, "IX_Keranjangs_IdUser");
 
                 entity.HasOne(d => d.IdBarangNavigation)
-                    .WithOne(p => p.Keranjang)
-                    .HasForeignKey<Keranjang>(d => d.IdBarang);
+                    .WithMany(p => p.Keranjangs)
+                    .HasForeignKey(d => d.IdBarang);
 
                 entity.HasOne(d => d.IdUserNavigation)
                     .WithMany(p => p.Keranjangs)
