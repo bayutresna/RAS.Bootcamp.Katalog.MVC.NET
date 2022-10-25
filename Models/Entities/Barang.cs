@@ -8,7 +8,6 @@ namespace RAS.Bootcamp.Katalog.MVC.NET.Models.Entities
         public Barang()
         {
             ItemTransaksis = new HashSet<ItemTransaksi>();
-            Keranjangs = new HashSet<Keranjang>();
         }
 
         public int Id { get; set; }
@@ -22,7 +21,7 @@ namespace RAS.Bootcamp.Katalog.MVC.NET.Models.Entities
         public string Url { get; set; } = null!;
 
         public virtual Penjual IdPenjualNavigation { get; set; } = null!;
+        public virtual Keranjang? Keranjang { get; set; }
         public virtual ICollection<ItemTransaksi> ItemTransaksis { get; set; }
-        public virtual ICollection<Keranjang> Keranjangs { get; set; }
     }
 }
