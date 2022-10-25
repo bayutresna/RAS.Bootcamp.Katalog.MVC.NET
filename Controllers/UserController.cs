@@ -92,7 +92,11 @@ public class UserController : Controller
             Password = request.Password,
             Tipe = request.Tipe
         };
-
+        if (request.Tipe == "Admin"){
+            _dbcontext.Users.Add(newUser);
+            _dbcontext.SaveChanges();
+        }
+        
         if (request.Tipe == "Penjual"){
             var penjual = new Katalog.MVC.NET.Models.Entities.Penjual{
             IdUser = newUser.Id,

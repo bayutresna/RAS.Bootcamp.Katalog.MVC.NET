@@ -7,6 +7,7 @@ using RAS.Bootcamp.Katalog.MVC.NET.Models.Request;
 using RAS.Bootcamp.Katalog.MVC.NET.Models;
 using RAS.Bootcamp.Katalog.MVC.NET.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace RAS.Bootcamp.Katalog.MVC.NET.Controllers;
 
@@ -22,9 +23,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        List<Barang> br = _dbcontext.Barangs.ToList();
-
-        
+        List<Barang> br = _dbcontext.Barangs.Include(e=> e.IdPenjualNavigation).ToList();
         return View(br);
     }
 
@@ -32,19 +31,21 @@ public class HomeController : Controller
     {
         return View();
     }
+
     [Authorize (Roles = "Pembeli")]
     public IActionResult MasukKeranjang(int id) {
         Barang br = _dbcontext.Barangs.First(x => x.Id == id);
+        int userid = int.Parse(User.Claims.First(e=> e.Type == "ID").Value);
         Keranjang kr = new Keranjang{
             IdBarang = id,
-            IdUser = int.Parse(User.Claims.First(e=> e.Type == "ID").Value),
+            IdUser = userid,
             HargaSatuan = br.Harga,
-            Jumlah = 1
+            Jumlah = 1,
         };
         _dbcontext.Keranjangs.Add(kr);
         _dbcontext.SaveChanges();
 
-        List<Barang> barang = _dbcontext.Barangs.ToList();
+        List<Barang> barang = _dbcontext.Barangs.Include(e=> e.IdPenjualNavigation).ToList();
         return View("Index",barang);
     }
 
