@@ -17,6 +17,7 @@ namespace RAS.Bootcamp.Katalog.MVC.NET.Models.Entities
         public string StatusTransaksi { get; set; } = null!;
         public string StatusBayar { get; set; } = null!;
         public string AlamatPengiriman { get; set; } = null!;
+        public int IdPenjual { get; set; }
 
         public virtual User IdUserNavigation { get; set; } = null!;
         public virtual ICollection<ItemTransaksi> ItemTransaksis { get; set; }

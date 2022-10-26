@@ -131,8 +131,8 @@ public class TransaksiController : Controller
 
     public IActionResult Pembayaran(int id){
         var tr = _dbcontext.Transakses.First(x=> x.Id == id);
-        tr.StatusBayar = "Lunas";
-        tr.StatusTransaksi = "Diproses";
+        tr.StatusBayar = "Dibayar";
+        tr.StatusTransaksi = "MenungguKonfirmasi";
         _dbcontext.SaveChanges();
         int dataiduser = int.Parse(User.Claims.First(e=> e.Type == "ID").Value);
         List<Transaksi> Ltr = _dbcontext.Transakses.Where(x=> x.IdUser == dataiduser).ToList();

@@ -43,10 +43,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.StatusBayar)
         </td>
+        <td>
+            <a class="btn btn-primary" asp-area="" asp-controller="Transaksi" asp-action="DetailTransaksi" asp-route-id = "@item.Id">Detail</a>
+        </td>
     </tr>
-    <th>
-        <a class="btn btn-primary" asp-area="" asp-controller="Transaksi" asp-action="DetailTransaksi" asp-route-id = "@item.Id">Detail</a>
-    </th>
+    
 }
     
 

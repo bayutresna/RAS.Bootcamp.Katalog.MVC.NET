@@ -34,8 +34,18 @@ public class HomeController : Controller
 
     [Authorize (Roles = "Pembeli")]
     public IActionResult MasukKeranjang(int id) {
-        Barang br = _dbcontext.Barangs.First(x => x.Id == id);
         int userid = int.Parse(User.Claims.First(e=> e.Type == "ID").Value);
+        // Keranjang cekBarang = _dbcontext.Keranjangs.FirstOrDefault(x=> x.IdBarang == id & x.IdUser == userid);
+        
+        // if (cekBarang != null){
+        //     cekBarang.Jumlah = cekBarang.Jumlah + 1;
+        //     _dbcontext.SaveChanges();
+
+        // List<Barang> listbr = _dbcontext.Barangs.Include(e=> e.IdPenjualNavigation).ToList();
+        // return View("Index",listbr);
+        // }
+
+        Barang br = _dbcontext.Barangs.First(x => x.Id == id);
         Keranjang kr = new Keranjang{
             IdBarang = id,
             IdUser = userid,

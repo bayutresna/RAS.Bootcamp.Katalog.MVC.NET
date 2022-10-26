@@ -42,16 +42,20 @@
             @Model.StatusBayar
         </td>
     </tr>
-    @if ((@Model.StatusTransaksi != "Diproses") && (@Model.StatusTransaksi != "Dibatalkan") && (@Model.StatusBayar != "Lunas") && (@Model.StatusBayar != "Dibatalkan"))
+    @if ((@Model.StatusTransaksi == "MenungguBayar"))
     {
     <th>
         <a type="button" class="btn btn-primary" asp-action="Pembayaran" asp-controller="Transaksi" asp-route-id = "@Model.Id" >Payment</a>
     </th>
-
+    
+    }
+    @if ((Model.StatusTransaksi == "Diproses") || (@Model.StatusTransaksi == "MenungguBayar"))
+    {
     <th>
         <a type="button" class="btn btn-danger" asp-action = "BatalTransaksi" asp-controller="Transaksi" asp-route-id="@Model.Id">Batalkan Transaksi</a>
     </th>
     }
+    
     @if (@Model.StatusTransaksi == "Dikirim"){
     <th>
         <a type="button" class="btn btn-primary" asp-action = "TerimaBarang" asp-controller="Transaksi" asp-route-id="@Model.Id">Konfirmasi Penerimaan</a>
